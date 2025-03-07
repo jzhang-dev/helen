@@ -1,5 +1,4 @@
-FROM pytorch/pytorch:1.4-cuda10.1-cudnn7-devel
-MAINTAINER Kishwar Shafin, kishwar.shafin@gmail.com
+FROM pytorch/pytorch:1.13.0-cuda11.6-cudnn8-devel
 
 # update and install dependencies
 RUN apt-get update && \
@@ -18,8 +17,10 @@ RUN git clone https://github.com/kishwarshafin/helen.git && \
     git submodule update --init && \
     git pull origin master && \
     python3 -m pip uninstall -y numpy && \
-    python3 -m pip install numpy && \
+    python3 -m pip install numpy==1.23.5 && \
     python3 -m pip install .
 
 # setup entrypoint
 WORKDIR /data
+
+
