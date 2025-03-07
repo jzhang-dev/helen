@@ -2,6 +2,7 @@ import os
 import onnxruntime
 import torch.distributed as dist
 import torch.multiprocessing as mp
+from torch.onnx import TrainingMode
 
 import sys
 import torch
@@ -227,7 +228,7 @@ def predict_cpu(file_chunks, output_filepath, model_path, batch_size, total_call
         # export the model as ONNX mode
         torch.onnx.export(transducer_model, (x, h),
                           model_path + ".onnx",
-                          training=False,
+                          training=TrainingMode.EVAL,
                           opset_version=10,
                           do_constant_folding=True,
                           input_names=['input_image', 'input_hidden'],
