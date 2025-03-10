@@ -49,3 +49,6 @@ build/
 outputs/
 out.txt
 .DS_store
+CMakeCache.txt
+.gitpod.yml
+CMakeFiles/*
