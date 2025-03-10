@@ -9,15 +9,16 @@ RUN apt-get update && \
     apt-get purge && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+RUN python3 -m pip uninstall -y numpy && \
+    python3 -m pip install numpy==1.23.5
+
 # get HELEN
 WORKDIR /opt
-RUN git clone https://github.com/kishwarshafin/helen.git && \
+RUN git clone https://github.com/jzhang-dev/helen.git && \
     cd /opt/helen && \
     git fetch && \
     git submodule update --init && \
     git pull origin master && \
-    python3 -m pip uninstall -y numpy && \
-    python3 -m pip install numpy==1.23.5 && \
     python3 -m pip install .
 
 # setup entrypoint
